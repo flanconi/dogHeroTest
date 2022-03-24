@@ -1,5 +1,5 @@
 {
-  "name": "test-DogHero",
+  "name": "DogHeroTest",
   "version": "1.0.0",
   "description": "As informações de instalação e enunciado do teste podem ser encontradas na [wiki](https://github.com/doghero/test-backend/wiki).",
   "main": "index.js",

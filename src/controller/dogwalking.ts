@@ -38,4 +38,16 @@ export class DogHeroController {
             res.status(400).send('Erro ao cadastrar o serviço')
         }
     }
+
+    test = async (req:Request, res:Response) => {
+        const {nome, idade} = req.body
+        
+        try {
+
+            res.status(201).send({nome, idade})
+        } catch (e: any) {
+            if (e.message) return res.status(400).send(e.message)
+            res.status(400).send('Erro ao cadastrar o serviço')
+        }
+    }
 }
