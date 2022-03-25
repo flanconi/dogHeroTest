@@ -1,0 +1,12 @@
+### Criar Passeio
+POST http://localhost:3003/create
+Content-Type: application/json
+
+{
+    "data_agendamento":"26/03/2022",
+    "latitude": "23º05'04",
+    "longitude": "23º08'05",
+    "quantidade_pets": 1,
+    "hora_inicial": "14:00:00",
+    "hora_final": "15:00:00"
+}

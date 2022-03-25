@@ -8,21 +8,21 @@ export class DogHeroInternalServices {
             ${currentDate.getFullYear()}, 
             ${currentDate.getMonth()}, 
             ${currentDate.getDate()},
-            ${Number(startTime)}
+            ${startTime}
         `)
         
         const currentDateEndTime = new Date(`
             ${currentDate.getFullYear()}, 
             ${currentDate.getMonth()}, 
             ${currentDate.getDate()},
-            ${Number(endTime)}
+            ${endTime}
         `)
 
         //calculate time difference
-        const walkingHour = (currentDateEndTime.getHours()) - (currentDateStartTime.getHours())
+        const walkingHour = currentDateEndTime.getHours() - currentDateStartTime.getHours()
         const walkingMinute = currentDateEndTime.getMinutes() - currentDateStartTime.getMinutes()
         
-        return `${walkingHour}:${walkingMinute}`
+        return `${Math.abs(walkingHour)}:${Math.abs(walkingMinute)}`
     }
 
     calculateWalkingPrice = (startTime:string, endTime:string, pets:number):number => {
@@ -34,19 +34,21 @@ export class DogHeroInternalServices {
         const formattedTime = walkingTime.split(':')
 
         //calculate price
+        let defaultPrice
+
         const calculatePrice = ():number => {
-            if(Number(formattedTime[0]) < 1 && Number(formattedTime[0]) >= 30){
-                const defaultPrice = 25
+            if(Number(formattedTime[0]) >= 1){
+                defaultPrice = 35
                 if(pets > 1){
-                    const walkingPrice = defaultPrice + (pets * 15)
+                    const walkingPrice = defaultPrice + ((pets - 1) * 20)
                     return walkingPrice
                 }
 
                 return defaultPrice
             } else {
-                const defaultPrice = 35
+                let defaultPrice = 25
                 if(pets > 1){
-                    const walkingPrice = defaultPrice + (pets * 20)
+                    const walkingPrice = defaultPrice + ((pets - 1) * 15)
                     return walkingPrice
                 }
 
@@ -56,4 +58,5 @@ export class DogHeroInternalServices {
 
         return calculatePrice()
     }
+
 }
