@@ -1,6 +1,10 @@
 import { app } from "./app";
 import { dogHeroController } from "./router/dogHeroRouter";
-import { DogHeroInternalServices } from "./services/dogHeroInternalServices";
+
+
+app.get('/index', dogHeroController.filterDogWalkingByDay)
+app.get('/show/:id', dogHeroController.appointmentDuration)
 
 app.post('/create', dogHeroController.insertDogWalkingOnDB)
-app.get('/index', dogHeroController.filterDogWalkingByDay)
+app.post('/start_walk/:id', dogHeroController.updateDogWalkingStatus)
+app.post('/end_walk/:id', dogHeroController.endDogWalking)

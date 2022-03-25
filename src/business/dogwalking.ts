@@ -63,4 +63,48 @@ export class DogHeroBusiness {
 
         return appointmentList
     }
+
+    appointmentDuration = async (id:string):Promise<string> => {
+
+        if(!id) {
+            throw new Error('Parâmetro ID inexistente.')
+        }
+
+        const appointmentTime = await this.dogHeroDatabase.appointmentById(id)
+        
+        if(appointmentTime[0] ===  undefined) {
+            throw new Error('Agendamento inexistente.')
+        }
+
+        const duration = appointmentTime[0].duracao
+    
+        return duration
+    }
+
+    updateDogWalkingStatus = async (id:string, status:string) => {
+        
+        if(!id || !status) {
+            throw new Error('Parâmetros ID ou STATUS inexistente.')
+        }
+
+        await this.dogHeroDatabase.updateDogWalkingStatus(id, status)
+
+    }
+
+    dogWalkingPrice = async (id:string) => {
+
+        if(!id) {
+            throw new Error('Parâmetro ID inexistente.')
+        }
+
+        const appointment = await this.dogHeroDatabase.appointmentById(id)
+
+        if(appointment[0] ===  undefined) {
+            throw new Error('Agendamento inexistente.')
+        }
+
+        const price = appointment[0].preco
+
+        return price
+    }
 }
