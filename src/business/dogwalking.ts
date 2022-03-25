@@ -37,17 +37,30 @@ export class DogHeroBusiness {
         //input model bank 
         const newDogWalkingInserted:dogWalking = {
             id:id,
-            data_agendamento:data_agendamento,
-            preco:dogWalkingPrice,
-            duracao:dogWalkingTime,
-            latitude:latitude,
-            longitude:longitude,
-            quantidade_pets:quantidade_pets,
-            hora_inicial:hora_inicial,
-            hora_final:hora_final
+            data_agendamento: data_agendamento,
+            preco: dogWalkingPrice,
+            duracao: dogWalkingTime,
+            latitude: latitude,
+            longitude: longitude,
+            quantidade_pets: quantidade_pets,
+            hora_inicial: hora_inicial,
+            hora_final: hora_final
         }
 
         //insert database
         await this.dogHeroDatabase.insertDogWalking(newDogWalkingInserted)
+    }
+
+    filterDogWalkingByDay = async ():Promise<dogWalking[]> => {
+        const currentDate = new Date()
+
+        const currentDay = `${currentDate.getDate()}`
+        const currentMonth = `${currentDate.getMonth() + 1}`
+        const currentYear = `${currentDate.getFullYear()}`
+
+        //get appointment
+        const appointmentList = await this.dogHeroDatabase.filterDogWalkingByDay(`${currentYear}/${currentMonth}/${currentDay}`)
+
+        return appointmentList
     }
 }

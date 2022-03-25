@@ -39,12 +39,12 @@ export class DogHeroController {
         }
     }
 
-    test = async (req:Request, res:Response) => {
-        const {nome, idade} = req.body
-        
+    filterDogWalkingByDay = async (req:Request, res:Response) => {
         try {
 
-            res.status(201).send({nome, idade})
+            const appointmentList = await this.dogHeroBusiness.filterDogWalkingByDay()
+
+            res.status(201).send(appointmentList)
         } catch (e: any) {
             if (e.message) return res.status(400).send(e.message)
             res.status(400).send('Erro ao cadastrar o serviço')

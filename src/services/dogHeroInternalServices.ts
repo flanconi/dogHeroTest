@@ -22,7 +22,7 @@ export class DogHeroInternalServices {
         const walkingHour = currentDateEndTime.getHours() - currentDateStartTime.getHours()
         const walkingMinute = currentDateEndTime.getMinutes() - currentDateStartTime.getMinutes()
         
-        return `${walkingHour}:${walkingMinute}`
+        return `${Math.abs(walkingHour)}:${Math.abs(walkingMinute)}`
     }
 
     calculateWalkingPrice = (startTime:string, endTime:string, pets:number):number => {
@@ -58,4 +58,5 @@ export class DogHeroInternalServices {
 
         return calculatePrice()
     }
+
 }
